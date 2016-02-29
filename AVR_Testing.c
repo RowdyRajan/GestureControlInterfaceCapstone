@@ -1,23 +1,13 @@
 /*
-    5-10-07
-    Copyright Spark Fun Electronics© 2007
-    Nathan Seidle
-    nathan at sparkfun.com
-    
-    ATmega168
-	
-	Example Blink
-	Toggles all IO pins at 1Hz
+This prgram will simulate finger touching when falshed on to
+the avr with the combination of buttons and LEDs
 */
-
 #include <avr/io.h>
 #define CHECK_BIT(var,pos) ((var) & (1<<(pos)))
 
 //Define functions
-//======================
 void ioinit(void);      //Initializes IO
 void delay_ms(uint16_t x); //General purpose delay
-//======================
 
 int main (void)
 {
