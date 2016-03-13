@@ -36,8 +36,9 @@ void DTW(int *x, int xlenght, int *y, int ylength, int*** result){
 	for(int i = 1; i<xlenght; i++ ){
 		for(int j = 1; j<ylength;j++){
 			int cost = x[i] - y[j];
-			int min = min(*result[i-1, j-1] ,min(*result[i-1,j], *result[i, j-1]));
-			*result[i,j] = cost + min; 
+
+			int compare = min(*result[i-1][j-1] , min(*result[i-1][j], *result[i][j-1]));
+			*result[i][j] = cost + compare; 
 		}
 	}
 }
