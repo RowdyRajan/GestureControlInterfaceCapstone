@@ -1,0 +1,71 @@
+Quartus II Archive log --	D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/DE2Component-05-04-2016.qarlog
+
+Archive:	D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/DE2Component-05-04-2016.qar
+Date:		Tue Apr 05 13:06:05 2016
+Quartus II 64-Bit		13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
+
+	=========== Files Selected: ===========
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/DE2Component.qpf
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/DE2Component.qsf
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/DE2Component.vhd
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/DE2Component_assignment_defaults.qdf
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/USB_Component_hw.tcl
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/assignment_defaults.qdf
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/niosII_system.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_avalon_sc_fifo.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_avalon_st_clock_crosser.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_avalon_st_handshake_clock_crosser.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_avalon_st_pipeline_base.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_merlin_address_alignment.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_merlin_arbitrator.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_merlin_burst_adapter.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_merlin_burst_uncompressor.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_merlin_master_agent.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_merlin_master_translator.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_merlin_slave_agent.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_merlin_slave_translator.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_merlin_width_adapter.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_reset_controller.sdc
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_reset_controller.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/altera_reset_synchronizer.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_addr_router.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_addr_router_001.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_altpll_0.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_cmd_xbar_demux.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_cmd_xbar_demux_001.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_cmd_xbar_mux.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_green_leds.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_id_router.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_id_router_001.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_id_router_004.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_irq_mapper.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_jtag_uart_0.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_nios2_qsys_0.sdc
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_nios2_qsys_0.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_nios2_qsys_0_jtag_debug_module_sysclk.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_nios2_qsys_0_jtag_debug_module_tck.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_nios2_qsys_0_jtag_debug_module_wrapper.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_nios2_qsys_0_oci_test_bench.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_nios2_qsys_0_ociram_default_contents.mif
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_nios2_qsys_0_rf_ram_a.mif
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_nios2_qsys_0_rf_ram_b.mif
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_nios2_qsys_0_test_bench.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_onchip_memory2_0.hex
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_onchip_memory2_0.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_rsp_xbar_demux.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_rsp_xbar_demux_004.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_rsp_xbar_mux.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_rsp_xbar_mux_001.sv
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_sdram_0.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_sram_0.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_switches.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_sysid_qsys_0.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_timer_0.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/db/ip/niosII_system/submodules/niosII_system_usb_0.v
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/incremental_db/compiled_partitions/DE2Component.db_info
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/niosII_system.qsys
+D:/School/CapstoneECE492/git/GestureGloveCapstone/DE2Component_restored/output_files/Chain2.cdf
+	======= Total: 60 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
