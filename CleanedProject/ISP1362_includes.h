@@ -20,10 +20,23 @@
 #include <fcntl.h>
 
 #include "BasicTyp.h"
+#include "common.h"
 #include "HAL4D13.h"
 #include "usb_irq.h"
 #include "ISP1362_HAL.h"
+#include "ISO.h"
 #include "ISR.h"
 #include "MAINLOOP.h"
+/*
+#include "ISP1362_basic_io.h"
+#include "ISP1362_MOUSE_HOST.h"
+#include "ISP1362_HAL4D13.h"
+#include "ISP1362_ISA290.h"
+#include "ISP1362_IRQ.h"
+#include "ISP1362_COMMON.h"
+#include "ISP1362_CHAP_9.h"
+#include "ISP1362_D13BUS.h"
+*/
+
 
 #endif /*ISP1362_INCLUDES_H_*/

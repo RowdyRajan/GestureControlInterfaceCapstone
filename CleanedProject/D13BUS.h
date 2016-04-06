@@ -3,6 +3,7 @@
 #define __D13BUS_H__
 
 #include "BasicTyp.h"
+#include "common.h"
 
 // ************************************************************************
 // USB Vendor device requests

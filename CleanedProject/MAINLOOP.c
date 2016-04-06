@@ -1,17 +1,20 @@
 
 #include <stdio.h>
 #include "BasicTyp.h"
+#include "common.h"
 #include "mainloop.h"
 #include "usb.h"
 #include "Hal4D13.h"
 #include "chap_9.h"
 #include "D13BUS.h"
-#include "HID.h"
-#include "usb_irq.h"
+#include "ISO.h"
 
+//extern IO_REQUEST idata ioRequest;
 extern D13FLAGS bD13flags;
+//extern USBCHECK_DEVICE_STATES bUSBCheck_Device_State;
 extern CONTROL_XFER ControlData;
-
+extern IDLE_TIMER idletime;
+extern HID_KEYS_REPORT hid_report;
 
 //*************************************************************************
 // USB protocol function pointer arrays
@@ -83,17 +86,17 @@ code CHAR * _NAME_USB_STANDARD_REQUEST[] =
 code void (*ClassDeviceRequest[])(void) =
 {
 		ML_Reserved,
-		HID_Get_Report,
-		HID_Get_Idle,
-		HID_Get_Protocol,
+		Get_Report,
+		Get_Idle,
+		Get_Protocol,
 		ML_Reserved,
 		ML_Reserved,
 		ML_Reserved,
 		ML_Reserved,
 		ML_Reserved,
-		HID_Set_Report,
-		HID_Set_Idle,
-		HID_Set_Protocol
+		Set_Report,
+		Set_Idle,
+		Set_Protocol
 };
 
 code CHAR * _NAME_USB_CLASS_REQUEST[] =
@@ -120,7 +123,7 @@ code CHAR * _NAME_USB_CLASS_REQUEST[] =
 
 code void (*VendorDeviceRequest[])(void) =
 {
-	  reserved,
+	  EnableIsoMode,
 	  D13Bus_ControlEntry,
 	  reserved,
 	  reserved,
@@ -169,16 +172,31 @@ void SetupToken_Handler(void)
   ControlData.wCount = 0;
 
   j = Hal4D13_ReadEndpointWOClearBuffer(EPINDEX4EP0_CONTROL_OUT, &ControlData.DeviceRequest, sizeof(ControlData.DeviceRequest) );
+  
+ // printf("j:%d\n",j);
+//  printf("sizeof(DEVICE_REQUEST):%d\n",sizeof(DEVICE_REQUEST));
+/*
+  printf("1:%X 2:%X 34:%X 56:%X 78:%X\n",
+  ControlData.DeviceRequest.bmRequestType,
+  ControlData.DeviceRequest.bRequest,
+  ControlData.DeviceRequest.wValue,
+  ControlData.DeviceRequest.wIndex,
+  ControlData.DeviceRequest.wLength);
+  */
+  if( j == sizeof(DEVICE_REQUEST) )
 
-  if( j == sizeof(DEVICE_REQUEST) ) {
-	/*//For debugging
+  
+//  if( Hal4D13_ReadEndpointWOClearBuffer(EPINDEX4EP0_CONTROL_OUT, (UCHAR *)(&(ControlData.DeviceRequest)), sizeof(ControlData.DeviceRequest))
+//   == sizeof(DEVICE_REQUEST) )
+  {
+/*
 	printf("ControlData.DeviceRequest_size:%ld\n", sizeof(ControlData.DeviceRequest));
     printf("ControlData.DeviceRequest.bmRequestType:0x%X\n",ControlData.DeviceRequest.bmRequestType);   //1BYTE
     printf("ControlData.DeviceRequest.bRequest:0x%X\n",ControlData.DeviceRequest.bRequest);//1BYTE
     printf("ControlData.DeviceRequest.wValue:0x%X\n",ControlData.DeviceRequest.wValue); //2BYTE
     printf("ControlData.DeviceRequest.wIndex:0x%X\n",ControlData.DeviceRequest.wIndex); //2BYTE
     printf("ControlData.DeviceRequest.wLength:0x%X\n",ControlData.DeviceRequest.wLength);//2BYTE
-	*/
+*/
     bD13flags.bits.At_IRQL1 = 0;
     LowerIRQL();
     ControlData.wLength = ControlData.DeviceRequest.wLength;
@@ -296,20 +314,20 @@ void help_devreq(UCHAR type, UCHAR req)
   }
 }
 
-void disconnect_USB_controller(void)
+void disconnect_USB(void)
 {
   printf("disconnect\n");
   Hal4D13_SetDevConfig( D13REG_DEVCNFG_NOLAZYCLOCK | D13REG_DEVCNFG_PWROFF | D13REG_DEVCNFG_CLOCKRUNNING );
   Hal4D13_SetMode( D13REG_MODE_INT_EN );           
 }
 
-void connect_USB_controller(void)
+void connect_USB(void)
 {
   RaiseIRQL(); //Disconnect irq
   printf("connect_USB\n");
   bD13flags.value = 0; /* reset event flags*/
   bD13flags.bits.DCP_state = USBFSM4DCP_IDLE;
-  config_endpoints();
+  config_endpoint();
   
   LowerIRQL();
 
@@ -322,7 +340,7 @@ void connect_USB_controller(void)
 }
 
 
-void config_endpoints(void)
+void config_endpoint(void)
 {
     /*Control Endpoint*/
 	//printf("CONFIG\n");
@@ -374,12 +392,12 @@ void config_endpoints(void)
 
 }
 
-void reconnect_USB_controller(void) {
-    disconnect_USB_controller();
-    connect_USB_controller();
+void reconnect_USB(void) {
+    disconnect_USB();
+    connect_USB();
 }
 
-void change_suspend_state(void) {
+void suspend_change(void) {
     printf("SUSPEND CHANGE \n");
  // disconnect_USB();
 //  Suspend_Device_Controller();

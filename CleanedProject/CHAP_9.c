@@ -2,11 +2,13 @@
 #include <stdio.h>
 #include <string.h>
 #include "BasicTyp.h"
+#include "common.h"
 #include "usb.h"
 #include "chap_9.h"
 #include "Hal4D13.h"
+#include "ISO.H"
 #include "MAINLOOP.H"
-#include "usb_irq.h"
+
 
 // *************************************************************************
 // Public Data
@@ -711,7 +713,8 @@ void Chap9_SetAddress(void)
     UCHAR   j;
 
     {
-        disable_irq();
+        RaiseIRQL();
+        disable();
         if(!ControlData.Abort)
         {
             if(bUSBCheck_Device_State.State_bits.DEVICE_DEFAULT_STATE)
@@ -765,7 +768,8 @@ void Chap9_SetAddress(void)
             }
 
         }
-        enable_irq();
+        LowerIRQL();
+        enable();
 
     }
     printf("Addr %x\n",Hal4D13_GetAddress());
@@ -777,63 +781,84 @@ void Chap9_GetDescriptor(void)
     UCHAR   bDescriptor =      MSB(ControlData.DeviceRequest.wValue);
     UCHAR   bDescriptorIndex = LSB(ControlData.DeviceRequest.wValue);
     UCHAR	bmRequestType = ControlData.DeviceRequest.bmRequestType;
-
+    USHORT	wIndex = ControlData.DeviceRequest.wIndex;
+    USHORT	wLen = ControlData.DeviceRequest.wLength;
+    /*if(bmRequestType == 0x82) {
+    printf("bmRequestType = %x\n", bmRequestType);
+    printf("bDescri = %d : ",bDescriptor);
+    printf("Index = %d\n",bDescriptorIndex);
+    printf("Interface = %d\n", wIndex);
+    printf("Length = %x\n", wLen);
+    }*/
+//  printf("USB_DEVICE_DESCRIPTORsize %d\n",sizeof(USB_DEVICE_DESCRIPTOR));
+//    printf("CONFIGURATIONsize %ld\n", sizeof(USB_CONFIGURATION_DESCRIPTOR_a));
     switch(bDescriptor)
     {
-    	case USB_DEVICE_DESCRIPTOR_TYPE:{//1
+    //sDevice sConfiguration
+    //sizeof(struct CONFIGURATION)
+//sizeof( struct DEVICE)
 
-			Chap9_BurstTransmitEP0( (PUCHAR)&DeviceDescr , sizeof(USB_DEVICE_DESCRIPTOR));
-			break;}
-		case USB_CONFIGURATION_DESCRIPTOR_TYPE:{//2
-			Chap9_BurstTransmitEP0((PUCHAR)&ConfigDescr_a, sizeof(USB_CONFIGURATION_DESCRIPTOR_a));
-			break;}
-		case USB_STRING_DESCRIPTOR_TYPE://3
-			switch(bDescriptorIndex)
-			{
-				case STR_INDEX_LANGUAGE:
-					printf("\n str1     \n");
-					Chap9_BurstTransmitEP0((PUCHAR)&strLanguage, sizeof(USB_STRING_LANGUAGE_DESCRIPTOR));
-					break;
-				case STR_INDEX_MANUFACTURER:
-					printf("\n str2     \n");
-					Chap9_BurstTransmitEP0((PUCHAR)&strManufacturer, sizeof(USB_STRING_MANUFACTURER_DESCRIPTOR));
-					break;
-				case STR_INDEX_PRODUCT:
-					printf("\n str3     \n");
-					Chap9_BurstTransmitEP0((PUCHAR)&strProduct, sizeof(USB_STRING_PRODUCT_DESCRIPTOR));
-					break;
-				case STR_INDEX_SERIALNUMBER:
-					printf("\n str4     \n");
-					Chap9_BurstTransmitEP0((PUCHAR)&strSerialNum, sizeof(USB_STRING_SERIALNUMBER_DESCRIPTOR));
-					break;
-				case STR_INDEX_CONFIGURATION:
-					printf("\n str5     \n");
-					Chap9_BurstTransmitEP0((PUCHAR)&strConfiguration, sizeof(USB_STRING_CONFIGURATION_DESCRIPTOR) );
-					break;
-				case STR_INDEX_INTERFACE:
-					printf("\n str6     \n");
-					Chap9_BurstTransmitEP0((PUCHAR)&strInterface, sizeof(USB_STRING_INTERFACE_DESCRIPTOR) );
-					break;
-				default:
-					printf("\n Unknown String \n");
-					Chap9_StallEP0InControlRead();
-					break;
-			}
-			break;
-		case USB_INTERFACE_DESCRIPTOR_TYPE:
-		case USB_ENDPOINT_DESCRIPTOR_TYPE:
-		case USB_POWER_DESCRIPTOR_TYPE:
-		case USB_HID_DESCRIPTOR_TYPE:
-			//bmRequestType will be 0x81 for HID related descriptor requests.
-			//For some reason this is not characterized as a class request
-			if(bmRequestType == 0x81){
-				Chap9_BurstTransmitEP0((PUCHAR)&REPORT_DESCRIPTOR2, sizeof(REPORT_DESCRIPTOR2) );
-			}
-			break;
-		default:
-			Chap9_StallEP0InControlRead();
-			break;
-		}
+    case USB_DEVICE_DESCRIPTOR_TYPE:{//1
+
+        Chap9_BurstTransmitEP0( (PUCHAR)&DeviceDescr , sizeof(USB_DEVICE_DESCRIPTOR));
+//      Chap9_BurstTransmitEP0((PUCHAR)&sDevice,sizeof(struct DEVICE));
+        break;}
+    case USB_CONFIGURATION_DESCRIPTOR_TYPE:{//2
+//      Chap9_BurstTransmitEP0((PUCHAR)&ConfigDescr, CONFIG_DESCRIPTOR_LENGTH);
+    	//printf("CONFIGURATIONsize %x\n", sizeof(USB_CONFIGURATION_DESCRIPTOR_a));
+      
+            //printf("\nConfigDescr     \n");  
+    	Chap9_BurstTransmitEP0((PUCHAR)&ConfigDescr_a, sizeof(USB_CONFIGURATION_DESCRIPTOR_a));//sizeof(USB_CONFIGURATION_DESCRIPTOR));
+       //Chap9_SetConfiguration();
+        
+      //  config_endpoint();
+   //       printf("\nInterfaceDescr0  ");    Chap9_BurstTransmitEP0((PUCHAR)&InterfaceDescr0, sizeof(USB_INTERFACE_DESCRIPTOR));
+//          printf("\nEP1_TXDesc       ");     Chap9_BurstTransmitEP0((PUCHAR)&EP1_TXDescr, sizeof(USB_ENDPOINT_DESCRIPTOR));
+  //        printf("\nEP1_RXDescr      ");    Chap9_BurstTransmitEP0((PUCHAR)&EP1_RXDescr, sizeof(USB_ENDPOINT_DESCRIPTOR));
+    //      printf("\nEP2_TXDescr      ");    Chap9_BurstTransmitEP0((PUCHAR)&EP2_TXDescr, sizeof(USB_ENDPOINT_DESCRIPTOR));
+      //    printf("\nEP2_RXDescr      ");    Chap9_BurstTransmitEP0((PUCHAR)&EP2_RXDescr, sizeof(USB_ENDPOINT_DESCRIPTOR));
+        break;}
+    case USB_STRING_DESCRIPTOR_TYPE://3
+        switch(bDescriptorIndex)
+        {
+        case STR_INDEX_LANGUAGE:
+            printf("\n str1     \n");
+            Chap9_BurstTransmitEP0((PUCHAR)&strLanguage, sizeof(USB_STRING_LANGUAGE_DESCRIPTOR));
+            break;
+        case STR_INDEX_MANUFACTURER:
+            printf("\n str2     \n");Chap9_BurstTransmitEP0((PUCHAR)&strManufacturer, sizeof(USB_STRING_MANUFACTURER_DESCRIPTOR));
+            break;
+        case STR_INDEX_PRODUCT:
+            printf("\n str3     \n");Chap9_BurstTransmitEP0((PUCHAR)&strProduct, sizeof(USB_STRING_PRODUCT_DESCRIPTOR));
+            break;
+        case STR_INDEX_SERIALNUMBER:
+            printf("\n str4     \n");Chap9_BurstTransmitEP0((PUCHAR)&strSerialNum, sizeof(USB_STRING_SERIALNUMBER_DESCRIPTOR));
+            break;
+        case STR_INDEX_CONFIGURATION:
+            printf("\n str5     \n");Chap9_BurstTransmitEP0((PUCHAR)&strConfiguration, sizeof(USB_STRING_CONFIGURATION_DESCRIPTOR) );
+            break;
+        case STR_INDEX_INTERFACE:
+            printf("\n str6     \n");Chap9_BurstTransmitEP0((PUCHAR)&strInterface, sizeof(USB_STRING_INTERFACE_DESCRIPTOR) );
+            break;
+        default:
+            printf("\n str7     \n");Chap9_StallEP0InControlRead();
+            break;
+        }
+        break;
+    case USB_INTERFACE_DESCRIPTOR_TYPE:
+    	printf("Interface Req\n");
+    	break;
+    case USB_ENDPOINT_DESCRIPTOR_TYPE:
+    case USB_POWER_DESCRIPTOR_TYPE:
+    case USB_HID_DESCRIPTOR_TYPE:
+    	if(bmRequestType == 0x81) {
+    		Chap9_BurstTransmitEP0((PUCHAR)&REPORT_DESCRIPTOR2, sizeof(REPORT_DESCRIPTOR2) );
+    	}
+    	break;
+    default:
+        Chap9_StallEP0InControlRead();
+        break;
+    }
 }
 
 void Chap9_GetConfiguration(void)
@@ -851,7 +876,8 @@ void Chap9_GetConfiguration(void)
     {
         if (ControlData.DeviceRequest.wValue == 0 && ControlData.DeviceRequest.wIndex == 0 && ControlData.DeviceRequest.wLength == 1)
         {
-        	Chap9_SingleTransmitEP0(&c, 1);
+
+        Chap9_SingleTransmitEP0(&c, 1);
         }
     }
 
@@ -916,6 +942,7 @@ void Chap9_GetInterface(void)
 
     if(bUSBCheck_Device_State.State_bits.DEVICE_ADDRESS_STATE)
         Chap9_StallEP0InControlRead();
+
 
     else
     {

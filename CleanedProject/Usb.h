@@ -5,7 +5,7 @@
 #define HID_MOUSE			0
 #define CUSTOM_UNKNOWN		0
 
-#include "BASICTYP.h"
+#include "common.h"
 
 #define MAXIMUM_USB_STRING_LENGTH 255
 

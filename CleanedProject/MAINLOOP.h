@@ -30,12 +30,11 @@
 void SetupToken_Handler(void);
 void DeviceRequest_Handler(void);
 void help_devreq(UCHAR type, UCHAR req);
-void disconnect_USB_controller(void);
-void connect_USB_controller(void);
-void reconnect_USB_controller(void);
-void config_endpoints(void);
-void change_suspend_state(void);
-
+void disconnect_USB(void);
+void connect_USB(void);
+void reconnect_USB(void);
+void config_endpoint(void);
+void suspend_change(void);
 void ML_AcknowledgeSETUP(void);
 void ML_StallEP0(void);
 void ML_Reserved(void);

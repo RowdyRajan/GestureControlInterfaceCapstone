@@ -2,15 +2,10 @@
 #include "system.h"
 #include "sys/alt_irq.h"
 
-/*
- *	This file is only for enabling and disabling interrupts
- *
- */
-
 alt_irq_context status;
 unsigned char INT_Enabled=1;
 
-void disable_irq(void)
+void disable(void)
 {
   if(INT_Enabled)
   {
@@ -19,7 +14,7 @@ void disable_irq(void)
   }
 }
 
-void enable_irq(void)
+void enable(void)
 {
   if(!INT_Enabled)
   {

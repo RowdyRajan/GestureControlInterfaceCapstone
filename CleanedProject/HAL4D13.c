@@ -5,6 +5,7 @@
 #include "system.h"
 #include "sys/alt_irq.h"
 #include "BasicTyp.h"
+#include "common.h"
 #include "HAL4D13.h"
 #include "usb_irq.h"
 #include "ISP1362_HAL.h"
